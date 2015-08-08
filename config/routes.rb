@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/where', to: 'pages#where'
   root 'pages#welcome'
 
   # Users
