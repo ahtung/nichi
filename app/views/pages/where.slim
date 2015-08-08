@@ -1,26 +1,43 @@
 h2 Where
 
+#search
+  = form_tag "", method: 'get' do
+    p
+      = text_field_tag :search, '', id: 'address'
 #map
 
 javascript:
-  map = new GMaps({
-    div: '#map',
-    lat: -12.043333,
-    lng: -77.028333
-  });
-  
-  GMaps.on('click', map.map, function(event) {
-    var index = map.markers.length;
-    var lat = event.latLng.lat();
-    var lng = event.latLng.lng();
-
-    map.addMarker({
-      lat: lat,
-      lng: lng,
-      title: 'Marker #' + index,
-      infoWindow: {
-        content : "TODO"
-      }
+  $( document ).ready(function() {
+    $( "#address" ).on('input propertychange paste', function() {
+      GMaps.geocode({
+        address: $(this).val(),
+        callback: function(results, status) {
+          if (status == 'OK') {
+            var latlng = results[0].geometry.location;
+            map.setCenter(latlng.lat(), latlng.lng());
+          }
+        }
+      });
     });
+
+    map = new GMaps({
+      div: '#map',
+      lat: -12.043333,
+      lng: -77.028333
+    });
+    
+    GMaps.on('click', map.map, function(event) {
+      var index = map.markers.length;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+
+      map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: 'Marker #' + index,
+        infoWindow: {
+          content : "TODO"
+        }
+      });
+    });  
   });
-  
