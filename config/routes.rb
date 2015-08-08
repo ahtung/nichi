@@ -3,10 +3,7 @@ Rails.application.routes.draw do
 
   # Users
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  authenticated :user do
-    # User root
-    root 'pages#welcome', as: :user_root
-  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
