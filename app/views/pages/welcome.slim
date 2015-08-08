@@ -1,0 +1,6 @@
+h1 Pages#welcome
+
+- if current_user.present?
+   = link_to "Sign Out", destroy_user_session_path
+- else
+  = link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2), class: 'button'

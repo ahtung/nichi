@@ -10,6 +10,12 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor', group: :production
+gem 'devise'
+gem 'omniauth-google-oauth2'
+gem 'foreman'
+gem 'slim-rails'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'puma'
 
 group :development, :test do
   gem 'byebug'
