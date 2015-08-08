@@ -34,6 +34,26 @@ class User < ActiveRecord::Base
     end
   end
 
+  def get_contact_details(google_contacts_user)
+    contact_info = google_contacts_user.contacts.map do |contact|
+      { email: contact.primary_email, name: contact.full_name }
+    end
+    contact_info.reject { |contact| contact[:email].nil? }
+  end
+
+  # Gets the access_token using users's refresh token
+  def access_token
+    return unless refresh_token
+    client = OAuth2::Client.new(
+      ENV['GOOGLE_CLIENT_ID'],
+      ENV['GOOGLE_CLIENT_SECRET'],
+      site: 'https://accounts.google.com',
+      authorize_url: '/o/oauth2/auth',
+      token_url: '/o/oauth2/token'
+    )
+    OAuth2::AccessToken.from_hash(client, refresh_token: refresh_token).refresh!
+  end
+
   private
 
   # Scehdule an import of the user's contact list after it is committed
