@@ -13,7 +13,8 @@ gem 'rails_12factor', group: :production
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'foreman'
-
+gem 'slim-rails'
+gem 'coffee-rails', '~> 4.1.0'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
