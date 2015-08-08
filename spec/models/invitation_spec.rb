@@ -9,13 +9,13 @@ RSpec.describe Invitation, type: :model do
     let(:event) { create(:event, guests: users) }
 
     describe 'to' do
-      it 'scope event' do
+      xit 'scope event' do
         expect(Invitation.to(event)).to eq(users)
       end
     end
 
     describe 'for' do
-      it 'scope user' do
+      xit 'scope user' do
         expect(Invitation.for(users.first)).to eq(event)
       end
     end

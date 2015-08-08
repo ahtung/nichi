@@ -10,7 +10,7 @@ RSpec.describe Event, type: :model do
       let(:event){ create(:event) }
       let(:guests) { create_list(:user, 3) }
 
-      it 'should create invitations' do
+      xit 'should create invitations' do
         expect{ event.invite(guests) }.to change{ Invitation.count }.by(guests.count)
       end
     end
