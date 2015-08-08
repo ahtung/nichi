@@ -27,5 +27,6 @@ group :development, :test do
 end
 
 source 'https://rails-assets.org' do
+  gem 'rails-assets-select2'
   gem 'rails-assets-materialize'
 end
