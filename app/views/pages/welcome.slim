@@ -1,3 +1,6 @@
 h1 Pages#welcome
-p Find me in app/views/pages/welcome.html.erb
-= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2), class: 'button'
+
+- if current_user.present?
+   = link_to "Sign Out", destroy_user_session_path
+- else
+  = link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2), class: 'button'
