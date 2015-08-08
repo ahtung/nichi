@@ -3,5 +3,10 @@ class PagesController < ApplicationController
   end
 
   def where
+
+  end
+
+  def who
+
   end
 end

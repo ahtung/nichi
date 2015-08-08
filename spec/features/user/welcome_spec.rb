@@ -10,6 +10,20 @@ RSpec.describe 'User', type: :feature, js: true do
     expect(page).to have_content('List Events')
   end
 
+  it 'should be able to see invitations' do
+    login_as user, scope: :user
+    visit root_path
+    click_on 'Invitations'
+    expect(page).to have_content('List Invitations')
+  end
+
+  it 'should be able to see invitations' do
+    login_as user, scope: :user
+    visit root_path
+    click_on 'Friendships'
+    expect(page).to have_content('List Friendships')
+  end
+
   it 'should be able to create event' do
     login_as user, scope: :user
     visit root_path

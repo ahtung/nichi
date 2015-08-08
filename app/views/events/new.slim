@@ -1,16 +1,73 @@
-h1 Nichi
-
 p= link_to 'Back', root_path, class: 'waves-effect waves-light btn'
 
-h2 New Event
+h3 New Event
 
 .row
   = form_for @event, url: { action: 'create' }, html: { class: 'col s12' } do |f|
-    .row
-      .input-field.col.s12
-        = f.text_field :name
-        = f.label :name
-    .row
-      .col.s12
-        = f.submit 'Save', class: 'waves-effect waves-light btn'
+    ul.tabs
+      li.tab.col.s3
+        a href="#test1" Who
+      li.tab.col.s3
+        a href="#test2" Where
+      li class="tab col s3 disabled"
+        a href="#test3" When (Disabled)
+      li class="tab col s3"
+        a href="#test4" Start
+    #test1.col.s12
+      .row
+        .input-field.col.s12
+          = f.text_field :name
+          = f.label :name
+    #test2.col.s12
+      = form_tag "", method: 'get', class: 'row', id: 'search' do
+        .input-field.col.s12
+          = text_field_tag :search, '', id: 'address'
+          = label_tag :search
+      #map
+
+    #test3.col.s12
+      p
+        = 'When'
+    #test4.col.s12
+      .row
+        p Will invite [TODO] to [TODO] on [TODO]
+      .row
+        .col.s12
+          = f.submit 'Save', class: 'waves-effect waves-light btn'
+
     
+javascript:
+  $( document ).ready(function() {
+    $( "#address" ).on('input propertychange paste', function() {
+      GMaps.geocode({
+        address: $(this).val(),
+        callback: function(results, status) {
+          if (status == 'OK') {
+            var latlng = results[0].geometry.location;
+            map.setCenter(latlng.lat(), latlng.lng());
+          }
+        }
+      });
+    });
+
+    map = new GMaps({
+      div: '#map',
+      lat: -12.043333,
+      lng: -77.028333
+    });
+    
+    GMaps.on('click', map.map, function(event) {
+      var index = map.markers.length;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+
+      map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: 'Marker #' + index,
+        infoWindow: {
+          content : "TODO"
+        }
+      });
+    });  
+  });

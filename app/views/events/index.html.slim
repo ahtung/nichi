@@ -1,8 +1,7 @@
-h1 Nichi
 p
   = link_to 'Back', root_path, class: 'waves-effect waves-light btn'
 
-h2 List Events
+h3 List Events
 
 ul.collapsible data-collapsible="accordion"
   - @events.each do |event|
@@ -11,5 +10,6 @@ ul.collapsible data-collapsible="accordion"
         i.material-icons filter_drama
         = event.name
       .collapsible-body
+        p= "You + #{event.invitations.count} Guests"
         p
           = link_to 'Delete', event_path(event), method: :delete, remote: true, class: 'waves-effect waves-light btn', onclick: "$('#event-#{event.id}').remove();Materialize.toast('<span>Item Deleted</span><a class=&quot;btn-flat yellow-text&quot; href=&quot;#!&quot;>Undo<a>', 5000)"

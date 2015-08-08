@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EventsController, type: :controller do
+RSpec.describe FriendshipsController, type: :controller do
 
   describe "GET #index" do
     xit "returns http success" do

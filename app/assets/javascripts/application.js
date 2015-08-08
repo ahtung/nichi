@@ -15,8 +15,10 @@
 //= require turbolinks
 //= require materialize
 //= require gmaps
+//= require select2
 //= require_tree .
 
 $(document).on('ready page:change', function() {
   $('.collapsible').collapsible();
+  $('ul.tabs').tabs();
 });
