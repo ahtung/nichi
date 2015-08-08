@@ -1,0 +1,7 @@
+h1 Events#index
+p Find me in app/views/events/index.html.slim
+
+- @events.each do |event|
+  = event.name
+  = ''
+  = link_to 'Delete', event_path(event), confirm: 'Are you sure?', method: :delete
