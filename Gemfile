@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'bundler', '>= 1.8.4'
 gem 'rails', '4.2.3'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -23,3 +24,6 @@ group :development, :test do
   gem 'spring'
 end
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-materialize'
+end
