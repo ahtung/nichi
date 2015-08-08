@@ -1,0 +1,13 @@
+p
+  = link_to 'Back', root_path, class: 'waves-effect waves-light btn'
+
+h3 List Friendships
+
+ul.collapsible data-collapsible="accordion"
+  - @friendships.each do |friendship|
+    li id="friendship-#{friendship.id}"
+      .collapsible-header
+        i.material-icons filter_drama
+        = "#{friendship.user.email} <-> #{friendship.contact.email}"
+      .collapsible-body
+        p TODO

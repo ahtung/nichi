@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'friendships/index'
+
   get 'invitations/index'
 
   get '/who', to: 'pages#who'
@@ -20,6 +22,9 @@ Rails.application.routes.draw do
       delete 'reject'
     end
   end
+
+  # Friendships
+  resources :friendships, only: [:index]
 
   # Sidekiq
   mount Sidekiq::Web => '/sidekiq'

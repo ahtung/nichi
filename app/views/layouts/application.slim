@@ -8,5 +8,8 @@ html
     = csrf_meta_tags
   body
     .container
-      h1= "Nichi (#{Event.count} Events, #{Invitation.count} Invitations)"
+      h1= "Nichi (#{Event.count} Events, #{Invitation.count} Invitations, #{Friendship.count} Friendships)"
+      - if current_user
+        h2= "You (#{current_user.contacts.count} Friends)"
       == yield
+      
