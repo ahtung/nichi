@@ -26,6 +26,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
 end
 
+group :test do
+  gem 'shoulda-matchers'
+end
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-gmaps'
   gem 'rails-assets-materialize'
