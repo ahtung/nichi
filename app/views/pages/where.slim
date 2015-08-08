@@ -1,1 +1,26 @@
 h2 Where
+
+#map
+
+javascript:
+  map = new GMaps({
+    div: '#map',
+    lat: -12.043333,
+    lng: -77.028333
+  });
+  
+  GMaps.on('click', map.map, function(event) {
+    var index = map.markers.length;
+    var lat = event.latLng.lat();
+    var lng = event.latLng.lng();
+
+    map.addMarker({
+      lat: lat,
+      lng: lng,
+      title: 'Marker #' + index,
+      infoWindow: {
+        content : "TODO"
+      }
+    });
+  });
+  
