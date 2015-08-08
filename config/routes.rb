@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'pages/welcome'
+  root 'pages#welcome'
 
   # Users
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
