@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
+  after_commit :schedule_import_contacts
+
   def self.find_for_google_oauth2(access_token, _ = nil)
     data = access_token.info
     user = User.find_by(email: data['email'])
@@ -15,5 +17,10 @@ class User < ActiveRecord::Base
       )
     end
     user
+  end
+
+  # Scehdule an import of the user's contact list after it is committed
+  def schedule_import_contacts
+    FriendSyncWorker.perform_in(id, 10.seconds) if last_contact_sync_at.nil?
   end
 end
