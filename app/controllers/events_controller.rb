@@ -1,11 +1,12 @@
 class EventsController < ApplicationController
   def index
-    @events = current_user.events
+    @events = Event.where(owner: current_user)
   end
 
   def destroy
-    @event = current_user.events.find(params[:id])
-    @event.destroy
+    event = Event.find(params[:id])
+    event.destroy
+    binding.pry
     redirect_to events_path
   end
 end
