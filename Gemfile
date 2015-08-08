@@ -21,6 +21,7 @@ gem 'slim-rails'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'puma'
 gem 'sidekiq'
+gem 'sinatra', require: false
 
 group :development, :test do
   gem 'byebug'
