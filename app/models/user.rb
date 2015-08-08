@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Relations
   has_many :invitations, dependent: :destroy
-  has_many :invited_events, through: :invitations, class_name: 'User'
+  has_many :invited_events, through: :invitations, class_name: 'Event'
   has_many :events, dependent: :destroy, foreign_key: 'owner_id'
   # has_many :contacts, class_name: 'User'
 

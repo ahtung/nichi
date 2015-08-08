@@ -4,4 +4,12 @@ class Invitation < ActiveRecord::Base
 
   scope :to, ->(event) { where event: event }
   scope :for, ->(user) { where user: user }
+
+  def event_name
+    event.name
+  end
+
+  def reject
+    destroy
+  end
 end

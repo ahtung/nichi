@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'invitations/index'
+
   get '/who', to: 'pages#who'
   get '/where', to: 'pages#where'
   root 'pages#welcome'
@@ -10,6 +12,14 @@ Rails.application.routes.draw do
 
   # Events
   resources :events, only: [:new, :create, :index, :destroy]
+
+  # Invitations
+  resources :invitations, only: [:index] do
+    member do
+      get 'accept'
+      delete 'reject'
+    end
+  end
 
   # Sidekiq
   mount Sidekiq::Web => '/sidekiq'

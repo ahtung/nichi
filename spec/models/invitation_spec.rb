@@ -6,17 +6,17 @@ RSpec.describe Invitation, type: :model do
 
   describe '.' do
     let(:users) { create_list(:user, 1) }
-    let(:event) { create(:event, guests: users) }
+    let(:event) { create(:event, users: users) }
 
     describe 'to' do
       xit 'scope event' do
-        expect(Invitation.to(event)).to eq(users)
+        expect(users.first.invitations.to(event)).to match_array(users.invitations)
       end
     end
 
     describe 'for' do
-      xit 'scope user' do
-        expect(Invitation.for(users.first)).to eq(event)
+      it 'scope user' do
+        expect(event.invitations.for(users.first)).to match_array(event.invitations)
       end
     end
   end

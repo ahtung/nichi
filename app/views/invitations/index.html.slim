@@ -1,0 +1,15 @@
+p
+  = link_to 'Back', root_path, class: 'waves-effect waves-light btn'
+
+h2 List Invitations
+
+ul.collapsible data-collapsible="accordion"
+  - @invitations.each do |invitation|
+    li id="invitation-#{invitation.id}"
+      .collapsible-header
+        i.material-icons filter_drama
+        = invitation.event_name
+      .collapsible-body
+        p
+          = link_to 'Accept', accept_invitation_path(invitation), remote: true, class: 'waves-effect waves-light btn', onclick: "Materialize.toast('<span>Accepted</span><a class=&quot;btn-flat yellow-text&quot; href=&quot;#!&quot;>Undo<a>', 5000)"
+          = link_to 'Reject', reject_invitation_path(invitation), method: :delete, remote: true, class: 'waves-effect waves-light btn', onclick: "$('#invitation-#{invitation.id}').remove();Materialize.toast('<span>Rejected</span><a class=&quot;btn-flat yellow-text&quot; href=&quot;#!&quot;>Undo<a>', 5000)"

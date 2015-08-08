@@ -1,6 +1,7 @@
 p
   - if current_user.present?
     p= link_to 'Events', events_path, class: 'waves-effect waves-light btn'
+    p= link_to 'invitations', invitations_path, class: 'waves-effect waves-light btn'
     p= link_to 'New', new_event_path, class: 'waves-effect waves-light btn'
     p= link_to "Sign Out", destroy_user_session_path, class: 'waves-effect waves-light btn'
   - else
