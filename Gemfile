@@ -15,6 +15,8 @@ gem 'omniauth-google-oauth2'
 gem 'foreman'
 gem 'slim-rails'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'puma'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
