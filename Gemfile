@@ -15,6 +15,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor', group: :production
 gem 'devise'
 gem 'omniauth-google-oauth2'
+gem 'google_contacts_api'
 gem 'foreman'
 gem 'slim-rails'
 gem 'coffee-rails', '~> 4.1.0'

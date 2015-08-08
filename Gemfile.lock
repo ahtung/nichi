@@ -71,6 +71,11 @@ GEM
       thor (~> 0.19.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    google_contacts_api (0.7.0)
+      activesupport
+      hashie
+      i18n
+      json
     hashie (3.4.2)
     hitimes (1.2.2)
     i18n (0.7.0)
@@ -219,6 +224,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   foreman
+  google_contacts_api
   jbuilder (~> 2.0)
   jquery-rails
   omniauth-google-oauth2
