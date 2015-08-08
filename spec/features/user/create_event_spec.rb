@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'User', type: :feature do
-  it 'should be able to create an event'
+  let(:events) { create_list(:event, 1) }
+  let(:user) { create(:user, events: events) }
+
+  xit 'should be able to create an event' do
+    login_as user, scope: :user
+    visit root_path
+    click_on 'New'
+
+  end
 end

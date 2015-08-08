@@ -6,7 +6,14 @@ class EventsController < ApplicationController
   def destroy
     event = Event.find(params[:id])
     event.destroy
-    binding.pry
-    redirect_to events_path
+    redirect_to events_url, status: 303
+  end
+
+  def new
+    @event = Event.new
+  end
+
+  def create
+
   end
 end

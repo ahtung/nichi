@@ -16,3 +16,8 @@
 //= require materialize
 //= require gmaps
 //= require_tree .
+
+$(document).on('ready page:change', function() {
+  Waves.displayEffect();
+  console.log('asd')
+});

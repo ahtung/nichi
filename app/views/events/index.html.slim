@@ -1,5 +1,8 @@
-h1 Events#index
-p Find me in app/views/events/index.html.slim
+h1 Nichi
+p
+  = link_to 'Back', root_path, class: 'waves-effect waves-light btn'
+
+h2 List Events
 
 ul.collapsible data-collapsible="accordion"
   - @events.each do |event|
