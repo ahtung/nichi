@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 20150808171601) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.datetime "last_contact_sync_at"
+    t.string   "name"
+    t.string   "refresh_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

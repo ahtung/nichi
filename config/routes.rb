@@ -1,13 +1,16 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
-  get 'events/index'
-
-  get 'events/destroy'
-
+  get '/who', to: 'pages#who'
   get '/where', to: 'pages#where'
   root 'pages#welcome'
 
   # Users
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  # Events
   resources :events, only: [:new, :create, :index, :destroy]
+
+  # Sidekiq
+  mount Sidekiq::Web => '/sidekiq'
 end
