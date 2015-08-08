@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor', group: :production
 gem 'devise'
 gem 'omniauth-google-oauth2'
+gem 'foreman'
 
 group :development, :test do
   gem 'byebug'
