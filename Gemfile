@@ -18,16 +18,19 @@ gem 'foreman'
 gem 'slim-rails'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'puma'
+gem 'factory_girl_rails'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'rspec-rails', '~> 3.0'
+  gem 'capybara'
 end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end
 
 source 'https://rails-assets.org' do
