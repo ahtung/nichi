@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   # Relations
+  has_many :invitations, dependent: :destroy
   has_many :events, dependent: :destroy, foreign_key: 'owner_id'
   has_many :contacts, class_name: 'User'
 
