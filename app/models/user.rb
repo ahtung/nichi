@@ -7,17 +7,34 @@ class User < ActiveRecord::Base
 
   after_commit :schedule_import_contacts
 
+  # A method nedeed by omniauth-google-oauth2 gem
+  # User is being created if it does not exist
   def self.find_for_google_oauth2(access_token, _ = nil)
     data = access_token.info
-    user = User.find_by(email: data['email'])
-    unless user
-      user = User.create(
-        email: data['email'],
-        password: Devise.friendly_token[0, 20]
-      )
-    end
-    user
+    User.where(email: data['email']).first_or_create(
+      name: data['name'],
+      refresh_token: (access_token.credentials) ? access_token.credentials.refresh_token : nil
+    )
   end
+
+  # import user's contacts from google
+  def import_contacts
+    return unless access_token
+    google_contacts_user = GoogleContactsApi::User.new(access_token)
+    conact_details = get_contact_details(google_contacts_user)
+    ActiveRecord::Base.transaction do
+      begin
+        conact_details.each do |conact_detail|
+          contacts << User.where(email: conact_detail[:email]).first_or_create.update(conact_detail)
+        end
+        update_attribute(:last_contact_sync_at, DateTime.now)
+      rescue
+        next
+      end
+    end
+  end
+
+  private
 
   # Scehdule an import of the user's contact list after it is committed
   def schedule_import_contacts
