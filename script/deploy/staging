@@ -1,0 +1,9 @@
+#!/bin/bash
+set -x
+set -e
+
+git push git@heroku.com:nichi-staging.git develop:master
+dokku run nichi-staging rake db:migrate
+dokku run nichi-staging rake db:seed
+dokku run nichi-staging rake sitemap:refresh
+#bundle exec rake smoke:staging
