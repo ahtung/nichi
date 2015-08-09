@@ -42,6 +42,6 @@ end
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-gmaps'
-  gem 'rails-assets-select2'
+  gem 'rails-assets-chosen'
   gem 'rails-assets-materialize'
 end
