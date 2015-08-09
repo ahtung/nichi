@@ -10,9 +10,11 @@ class User < ActiveRecord::Base
   has_many :invited_events, through: :invitations, class_name: 'Event'
   has_many :events, dependent: :destroy, foreign_key: 'owner_id'
   has_many :friendships, dependent: :destroy
+  has_many :calendars, dependent: :destroy
   has_many :contacts, class_name: 'User', through: :friendships
 
   after_commit :schedule_import_contacts, on: [:update, :create]
+  after_validation :create_calendar
 
   # A method nedeed by omniauth-google-oauth2 gem
   # User is being created if it does not exist
@@ -73,5 +75,17 @@ class User < ActiveRecord::Base
   # Scehdule an import of the user's contact list after it is committed
   def schedule_import_contacts
     FriendSyncWorker.perform_in(10.seconds, id) if last_contact_sync_at.nil?
+  end
+
+  def create_calendar
+    return unless calendars.empty?
+    return unless refresh_token
+    client = Google::APIClient.new(authorization: { access_token: refresh_token })
+    service = client.discovered_api('calendar', 'v3')
+    calendar = client.execute(api_method: service.calendars.insert, body: JSON.dump({ 'summary' => 'nichi Calendar' }), headers: { 'Content-Type' => 'application/json'})
+    if @calendar.status == 200
+      google_calendar_id = JSON.decode(@calendar.response.body)['id']
+      calendars.create(google_id: google_calendar_id)
+    end
   end
 end
