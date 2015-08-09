@@ -9,6 +9,7 @@ RSpec.describe Invitation, type: :model do
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:event) }
 
+  # Class methods
   describe '.' do
     let(:users) { create_list(:user, 1) }
     let(:event) { create(:event, users: users) }
@@ -22,6 +23,24 @@ RSpec.describe Invitation, type: :model do
     describe 'for' do
       it 'scope user' do
         expect(event.invitations.for(users.first)).to match_array(event.invitations)
+      end
+    end
+  end
+
+  # Instnce methods
+  describe '#' do
+    let(:invitation) { create(:invitation) }
+
+    describe 'event_name' do
+      it 'should return event.name' do
+        expect(invitation.event_name).to eq(invitation.event.name)
+      end
+    end
+
+    describe 'reject' do
+      it 'should call destroy' do
+        expect(invitation.reject).to receive(:destroy)
+        invitation.reject
       end
     end
   end
