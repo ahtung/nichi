@@ -239,7 +239,7 @@ Devise.setup do |config|
     :google_oauth2,
     ENV['GOOGLE_CLIENT_ID'],
     ENV['GOOGLE_CLIENT_SECRET'],
-    scope: 'plus.login, plus.me, email, profile, https://www.google.com/m8/feeds',
+    scope: 'plus.login, plus.me, email, profile, https://www.google.com/m8/feeds, https://www.googleapis.com/auth/calendar',
     prompt: 'consent'
   )
 
