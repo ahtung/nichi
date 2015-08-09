@@ -12,5 +12,6 @@
  *
  *= require_tree .
  *= require materialize
+ *= require select2
  *= require_self
  */
