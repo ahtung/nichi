@@ -9,6 +9,10 @@ RSpec.describe Invitation, type: :model do
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:event) }
 
+  # DB Indexes
+  it { should have_db_index(:user_id) }
+  it { should have_db_index(:event_id) }
+
   # Class methods
   describe '.' do
     let(:users) { create_list(:user, 1) }

@@ -11,7 +11,7 @@ h3 New Event
         a href="#test1" Who
       li.tab.col.s3
         a href="#test2" Where
-      li class="tab col s3 disabled"
+      li class="tab col s3"
         a href="#test3" When (Disabled)
       li class="tab col s3"
         a href="#test4" Start
@@ -32,8 +32,9 @@ h3 New Event
       #map
 
     #test3.col.s12
-      p
-        = 'When'
+      p When
+      - if current_user.calendars.first
+        iframe frameborder="0" height="600" scrolling="no" src="//www.google.com/calendar/embed?src=#{current_user.calendars.first.google_id}" style="border: 0" width="800"
     #test4.col.s12
       .row
         p Will invite [TODO] to [TODO] on [TODO]

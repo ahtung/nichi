@@ -15,6 +15,7 @@ gem 'rails_12factor', group: :production
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'google_contacts_api'
+gem 'google-api-client', :require => 'google/api_client'
 gem 'foreman'
 gem 'slim-rails'
 gem 'coffee-rails', '~> 4.1.0'
