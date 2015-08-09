@@ -1,8 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Invitation, type: :model do
+  # Relations
   it { should belong_to(:user) }
   it { should belong_to(:event) }
+
+  # Validations
+  it { should validate_presence_of(:user) }
+  it { should validate_presence_of(:event) }
 
   describe '.' do
     let(:users) { create_list(:user, 1) }
