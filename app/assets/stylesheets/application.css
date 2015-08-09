@@ -11,5 +11,7 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require materialize
+ *= require chosen
  *= require_self
  */

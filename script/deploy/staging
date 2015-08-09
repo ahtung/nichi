@@ -1,0 +1,10 @@
+#!/bin/bash
+set -x
+set -e
+
+# git remote add staging dokku@104.155.13.231:nichi-staging
+# git push staging develop:master
+# dokku run nichi-staging rake db:migrate
+# dokku run nichi-staging rake db:seed
+# dokku run nichi-staging rake sitemap:refresh
+# bundle exec rake smoke:staging

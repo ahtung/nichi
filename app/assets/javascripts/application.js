@@ -13,4 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require materialize
+//= require gmaps
+//= require chosen
 //= require_tree .
+
+$(document).on('ready page:change', function() {
+  $('.collapsible').collapsible();
+  $('ul.tabs').tabs();
+  $(".chosen-select").chosen({ width: "100%" });
+});

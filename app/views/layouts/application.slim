@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Nichi
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag '//fonts.googleapis.com/icon?family=Material+Icons'
+    = javascript_include_tag '//maps.google.com/maps/api/js?sensor=true'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .container
+      h1= "Nichi (#{Event.count} Events, #{Invitation.count} Invitations, #{Friendship.count} Friendships)"
+      - if current_user
+        h2= "You (#{current_user.contacts.count} Friends)"
+      == yield
+      
