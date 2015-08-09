@@ -6,9 +6,9 @@ RSpec.describe 'User', type: :feature, js: true do
 
   it 'should be able to reject invitation' do
     login_as user, scope: :user
-    visit invitaitons_path
+    visit invitations_path
     first("li#invitation-#{invitations.first.id} div").click
-    click_on 'Delete'
-    expect(page).not_to have_content(invitations.first.name)
+    click_on 'Reject'
+    expect(page).not_to have_content(invitations.first.event.name)
   end
 end
