@@ -25,7 +25,7 @@ h3 New Event
         .input-field.col.s12
           = f.select :user_ids, current_user.friendships.collect { |x| [x.contact.name, x.id] }, {}, class: 'chosen-select', multiple: true, data: { placeholder: "Who" }
     #test2.col.s12
-      = form_tag "", method: 'get', class: 'row', id: 'search' do
+      .row
         .input-field.col.s12
           = text_field_tag :search, '', id: 'address'
           = label_tag :search
