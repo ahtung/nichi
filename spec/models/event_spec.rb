@@ -11,6 +11,9 @@ RSpec.describe Event, type: :model do
   it { should validate_presence_of(:owner) }
   # guest count should be > 0
 
+  # DB Indexes
+  it { should have_db_index(:owner_id) }
+
   describe '#' do
     describe 'invite' do
       let!(:event){ create(:event) }
