@@ -13,7 +13,7 @@ RSpec.describe Event, type: :model do
 
   describe '#' do
     describe 'invite' do
-      let(:event){ create(:event) }
+      let!(:event){ create(:event) }
       let(:guests) { create_list(:user, 3) }
 
       it 'should create invitations' do
