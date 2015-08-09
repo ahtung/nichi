@@ -12,8 +12,7 @@ RSpec.describe 'User', type: :feature, js: true do
     fill_in 'event_name', with: event.name
 
     click_on 'Who'
-    binding.pry
-    first('#event_user_ids').find("option[value='#{user.contacts.first.id}']").select_option
+    select(user.contacts.first.name)
 
     click_on 'When'
     # TODO
