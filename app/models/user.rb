@@ -80,11 +80,12 @@ class User < ActiveRecord::Base
   def create_calendar
     return unless calendars.empty?
     return unless refresh_token
-    client = Google::APIClient.new(authorization: { access_token: refresh_token })
+    client = Google::APIClient.new
+    client.authorization.access_token = refresh_token
     service = client.discovered_api('calendar', 'v3')
     calendar = client.execute(api_method: service.calendars.insert, body: JSON.dump({ 'summary' => 'nichi Calendar' }), headers: { 'Content-Type' => 'application/json'})
-    if @calendar.status == 200
-      google_calendar_id = JSON.decode(@calendar.response.body)['id']
+    if calendar.status == 200
+      google_calendar_id = ActiveSupport::JSON.decode(calendar.response.body)['id']
       calendars.create(google_id: google_calendar_id)
     end
   end
