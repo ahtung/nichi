@@ -11,10 +11,13 @@ class EventsController < ApplicationController
 
   def new
     client = Google::APIClient.new
-    client.authorization.access_token = current_user.access_token
+    client.authorization.access_token = current_user.refresh_token
     service = client.discovered_api('calendar', 'v3')
     @calendar = client.execute(:api_method => service.calendars.insert,
-                            :parameters => {'calendarId' => 'nichi'})
+                        :body => JSON.dump({ 'summary' => 'nichi Calendar' }),
+                        :headers => {'Content-Type' => 'application/json'})
+    calendar_id = ActiveSupport::JSON.decode(@calendar.response.body) if @calendar.status == 200
+    @calendar_id = calendar_id['id']
     @event = Event.new
   end
 
