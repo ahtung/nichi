@@ -9,7 +9,7 @@ h3 New Event
         a href="#test1" Who
       li.tab.col.s3
         a href="#test2" Where
-      li class="tab col s3 disabled"
+      li class="tab col s3"
         a href="#test3" When (Disabled)
       li class="tab col s3"
         a href="#test4" Start
@@ -26,8 +26,8 @@ h3 New Event
       #map
 
     #test3.col.s12
-      p
-        = 'When'
+      p When
+      = @calendar.status
     #test4.col.s12
       .row
         p Will invite [TODO] to [TODO] on [TODO]
@@ -35,7 +35,7 @@ h3 New Event
         .col.s12
           = f.submit 'Save', class: 'waves-effect waves-light btn'
 
-    
+
 javascript:
   $( document ).ready(function() {
     $( "#address" ).on('input propertychange paste', function() {
@@ -55,7 +55,7 @@ javascript:
       lat: -12.043333,
       lng: -77.028333
     });
-    
+
     GMaps.on('click', map.map, function(event) {
       var index = map.markers.length;
       var lat = event.latLng.lat();
@@ -69,5 +69,5 @@ javascript:
           content : "TODO"
         }
       });
-    });  
+    });
   });
