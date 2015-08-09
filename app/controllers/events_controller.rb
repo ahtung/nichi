@@ -10,6 +10,11 @@ class EventsController < ApplicationController
   end
 
   def new
+    client = Google::APIClient.new
+    client.authorization.access_token = current_user.access_token
+    service = client.discovered_api('calendar', 'v3')
+    @calendar = client.execute(:api_method => service.calendars.insert,
+                            :parameters => {'calendarId' => 'nichi'})
     @event = Event.new
   end
 
