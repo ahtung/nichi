@@ -4,7 +4,7 @@ RSpec.describe 'User', type: :feature, js: true do
   let(:event) { build(:event) }
   let(:user) { create(:user, contacts: create_list(:user,2)) }
 
-  xit 'should be able to create an event' do
+  it 'should be able to create an event' do
     login_as user, scope: :user
     visit root_path
 
@@ -12,8 +12,8 @@ RSpec.describe 'User', type: :feature, js: true do
     fill_in 'event_name', with: event.name
 
     click_on 'Who'
-    binding.pry
-    first('#event_user_ids').find("option[value='#{user.contacts.first.id}']").select_option
+    first("#event_user_ids_chosen").click
+    first(".chosen-results").first('li').click
 
     click_on 'When'
     # TODO

@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
     OAuth2::AccessToken.from_hash(client, refresh_token: refresh_token).refresh!
   end
 
+  def contacts_for_select
+    contacts.collect { |contact| [contact.name, contact.id] }
+  end
+
   private
 
   # Scehdule an import of the user's contact list after it is committed
