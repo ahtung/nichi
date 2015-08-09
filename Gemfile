@@ -37,11 +37,12 @@ end
 group :test do
   gem 'rspec-sidekiq'
   gem 'shoulda-matchers'
+  gem 'launchy'
   gem 'simplecov', require: false
 end
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-gmaps'
-  gem 'rails-assets-select2'
+  gem 'rails-assets-chosen'
   gem 'rails-assets-materialize'
 end
