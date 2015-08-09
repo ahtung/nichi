@@ -21,4 +21,5 @@
 $(document).on('ready page:change', function() {
   $('.collapsible').collapsible();
   $('ul.tabs').tabs();
+  $(".chosen-select").chosen({ width: "100%" });
 });
