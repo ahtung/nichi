@@ -239,6 +239,7 @@ Devise.setup do |config|
     :google_oauth2,
     ENV['GOOGLE_CLIENT_ID'],
     ENV['GOOGLE_CLIENT_SECRET'],
+    access_type: "offline",
     scope: 'plus.login, plus.me, email, profile, https://www.google.com/m8/feeds, https://www.googleapis.com/auth/calendar',
     prompt: 'consent'
   )

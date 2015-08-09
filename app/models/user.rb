@@ -12,33 +12,36 @@ class User < ActiveRecord::Base
   has_many :friendships, dependent: :destroy
   has_many :contacts, class_name: 'User', through: :friendships
 
-  after_commit :schedule_import_contacts
+  after_commit :schedule_import_contacts, on: [:update, :create]
 
   # A method nedeed by omniauth-google-oauth2 gem
   # User is being created if it does not exist
   def self.find_for_google_oauth2(access_token, _ = nil)
-    data = access_token.info
-    User.where(email: data['email']).first_or_create(
-      name: data['name'],
-      refresh_token: (access_token.credentials) ? access_token.credentials.refresh_token : nil
+    user = User.where(email: access_token.info.email).first_or_create
+    user.update(
+      refresh_token: access_token.credentials.token,
+      name: access_token.info.name
     )
+    user
+  end
+
+  def password_required?
+    false
   end
 
   # import user's contacts from google
   def import_contacts
+    Rails.logger.info 'import_contacts'
     return unless access_token
     google_contacts_user = GoogleContactsApi::User.new(access_token)
+    Rails.logger.info google_contacts_user
     conact_details = get_contact_details(google_contacts_user)
-    ActiveRecord::Base.transaction do
-      begin
-        conact_details.each do |conact_detail|
-          contacts << User.where(email: conact_detail[:email]).first_or_create.update(conact_detail)
-        end
-        update_attribute(:last_contact_sync_at, DateTime.now)
-      rescue
-        next
-      end
+    conact_details.each do |conact_detail|
+      user = User.where(email: conact_detail[:email]).first_or_create
+      user.update(conact_detail)
+      contacts << user
     end
+    update_attribute(:last_contact_sync_at, DateTime.now)
   end
 
   def get_contact_details(google_contacts_user)
@@ -61,10 +64,14 @@ class User < ActiveRecord::Base
     OAuth2::AccessToken.from_hash(client, refresh_token: refresh_token).refresh!
   end
 
+  def contacts_for_select
+    contacts.collect { |contact| [contact.name, contact.id] }
+  end
+
   private
 
   # Scehdule an import of the user's contact list after it is committed
   def schedule_import_contacts
-    FriendSyncWorker.perform_in(id, 10.seconds) if last_contact_sync_at.nil?
+    FriendSyncWorker.perform_in(10.seconds, id) if last_contact_sync_at.nil?
   end
 end
