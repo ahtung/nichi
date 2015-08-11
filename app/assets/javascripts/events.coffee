@@ -3,3 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
   $(".chosen-select").chosen({ width: "100%" })
+  $('.datepicker').pickadate
+    selectMonths: true
+    selectYears: 15

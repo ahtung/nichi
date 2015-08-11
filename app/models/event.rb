@@ -9,6 +9,7 @@ class Event < ActiveRecord::Base
   validates :owner, presence: true
   validate :validate_users
 
+  attr_accessor :event_date, :event_time
   # Instance methods
   def validate_users
     errors.add(:users, 'No guests? :S') unless users.present?
