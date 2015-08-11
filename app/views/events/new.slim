@@ -12,7 +12,7 @@ h3 New Event
       li.tab.col.s3
         a href="#test2" Where
       li class="tab col s3"
-        a href="#test3" When (Disabled)
+        a href="#test3" When
       li class="tab col s3"
         a href="#test4" Start
     #test0.col.s12
@@ -33,6 +33,15 @@ h3 New Event
 
     #test3.col.s12
       p When
+      .input-field.col.s4
+        = f.date_field :event_date, class: 'datepicker'
+        = f.label :event_date
+      .input-field.col.s4
+        = f.time_field :event_time
+        = f.label :event_time
+      .input-field.col.s2
+        = link_to '#', id: 'add-event', class: "btn-floating"
+          i class="material-icons" add
       - if current_user.calendars.first
         iframe frameborder="0" height="600" scrolling="no" src="//www.google.com/calendar/embed?src=#{current_user.calendars.first.google_id}" style="border: 0" width="800"
     #test4.col.s12
