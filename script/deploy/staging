@@ -2,9 +2,7 @@
 set -x
 set -e
 
-# git remote add staging dokku@104.155.13.231:nichi-staging
-# git push staging develop:master
-# dokku run nichi-staging rake db:migrate
-# dokku run nichi-staging rake db:seed
-# dokku run nichi-staging rake sitemap:refresh
+git push git@heroku.com:nichi-staging.git develop:master
+heroku run rake db:migrate --app nichi-staging
+heroku run rake db:seed --app nichi-staging
 # bundle exec rake smoke:staging
