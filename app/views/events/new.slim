@@ -33,15 +33,16 @@ h3 New Event
 
     #test3.col.s12
       p When
-      .input-field.col.s4
-        = f.date_field :event_date, class: 'datepicker'
-        = f.label :event_date
-      .input-field.col.s4
-        = f.time_field :event_time
-        = f.label :event_time
-      .input-field.col.s2
-        = link_to '#', id: 'add-event', class: "btn-floating"
-          i class="material-icons" add
+      .row#dates-add-form
+        .input-field.col.m3
+          = date_field_tag :event_start_at, '', { class: 'datepicker' }
+        .input-field.col.m3
+          = time_field_tag :event_start_at_time, '', { ignore_date: true }
+        .input-field.col.m3
+          = link_to '#', id: 'add-dates', class: "btn" do
+            i class="material-icons" add
+        #selected-dates.col.s12
+      //TODO Remove below line
       - if current_user.calendars.first
         iframe frameborder="0" height="600" scrolling="no" src="//www.google.com/calendar/embed?src=#{current_user.calendars.first.google_id}" style="border: 0" width="800"
     #test4.col.s12
