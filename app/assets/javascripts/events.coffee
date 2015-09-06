@@ -14,10 +14,13 @@ class @Event
     $('#selected-dates').append($('<div>').attr('class', 'row'))
     $('#selected-dates .row:last').append($('<div>').attr('class', 'selected-date col s8'))
     $('#selected-dates .row:last').append($('<div>').attr('class', 'col s2'))
-    $('#selected-dates .row:last').append($('<div>').attr('class', 'col s2'))
     $('#selected-dates .row:last').append($('<div>').attr('class', 'remove-date col s2'))
     $('#selected-dates .selected-date:last').append(elem)
     $('#selected-dates .remove-date:last').append(remove)
+  removeDateRow: (elem) ->
+    index = $('#selected-dates .remove-date').index(elem)
+    elem.parent('.row').remove()
+    @event.dates.splice(index, 1)
 
 $ ->
   event = new Event
@@ -34,3 +37,6 @@ $ ->
       event.createDateRow()
     else
       console.log('false')
+
+  $(document).on 'click', '.remove-date', ->
+    event.removeDateRow($(this))
