@@ -8,10 +8,16 @@ class @Event
   addDate: (datetime) ->
     if @event.dates.length < 3 then @event.dates.push([datetime]) else false
   createDateRow: ->
+    [..., last] = @event.dates
+    elem = $('<input>').val(last).attr('readonly',true)
+    remove = $('<i>').attr('class','material-icons').text('delete')
     $('#selected-dates').append($('<div>').attr('class', 'row'))
     $('#selected-dates .row:last').append($('<div>').attr('class', 'selected-date col s8'))
     $('#selected-dates .row:last').append($('<div>').attr('class', 'col s2'))
     $('#selected-dates .row:last').append($('<div>').attr('class', 'col s2'))
+    $('#selected-dates .row:last').append($('<div>').attr('class', 'remove-date col s2'))
+    $('#selected-dates .selected-date:last').append(elem)
+    $('#selected-dates .remove-date:last').append(remove)
 
 $ ->
   event = new Event
@@ -24,9 +30,7 @@ $ ->
     date = $('#event_start_at').val()
     time = $('#event_start_at_time').val()
     datetime = date+" "+time
-    elem = $('<input>').val(datetime).attr('readonly',true)
     if(event.addDate(datetime))
       event.createDateRow()
-      $('#selected-dates .selected-date:last').append(elem)
     else
       console.log('false')
