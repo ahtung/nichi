@@ -23,9 +23,10 @@ $ ->
     e.preventDefault()
     date = $('#event_start_at').val()
     time = $('#event_start_at_time').val()
-    elem = $('<input>').val(date+" "+time).attr('readonly',true)
-    $('#selected-dates').append($('<div>').attr('class', 'row'))
-    $('#selected-dates .row:last').append($('<div>').attr('class', 'selected-date col s8'))
-    $('#selected-dates .row:last').append($('<div>').attr('class', 'col s2'))
-    $('#selected-dates .row:last').append($('<div>').attr('class', 'col s2'))
-    $('#selected-dates .selected-date:last').append(elem)
+    datetime = date+" "+time
+    elem = $('<input>').val(datetime).attr('readonly',true)
+    if(event.addDate(datetime))
+      event.createDateRow()
+      $('#selected-dates .selected-date:last').append(elem)
+    else
+      console.log('false')
