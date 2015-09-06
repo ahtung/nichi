@@ -32,8 +32,8 @@ $ ->
     e.preventDefault()
     date = $('#event_start_at').val()
     time = $('#event_start_at_time').val()
-    datetime = date+" "+time
-    if(event.addDate(datetime))
+    if date && time then datetime = date+" "+time else false
+    if(datetime && event.addDate(datetime))
       event.createDateRow()
     else
       console.log('false')
